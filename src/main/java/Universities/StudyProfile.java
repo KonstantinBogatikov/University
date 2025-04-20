@@ -1,3 +1,5 @@
+package Universities;
+
 public enum StudyProfile {
     MEDICINE("Медицина"),
     PHYSICS("Физика"),
@@ -16,7 +18,7 @@ public enum StudyProfile {
 
     @Override
     public String toString() {
-        return "StudyProfile{" +
+        return "Universities.StudyProfile{" +
                 "profileName='" + profileName + '\'' +
                 '}';
     }

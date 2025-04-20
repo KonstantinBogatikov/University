@@ -1,3 +1,5 @@
+package Universities;
+
 public class University {
 
     private String id;
@@ -61,7 +63,7 @@ public class University {
 
     @Override
     public String toString() {
-        return "University{" +
+        return "Universities.University{" +
                 "id='" + id + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +

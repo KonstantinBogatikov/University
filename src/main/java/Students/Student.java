@@ -1,3 +1,5 @@
+package Students;
+
 public class Student {
 
     private String fullName;
@@ -50,7 +52,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Students.Student{" +
                 "fullName='" + fullName + '\'' +
                 ", universityId='" + universityId + '\'' +
                 ", currentCourseNumber=" + currentCourseNumber +
