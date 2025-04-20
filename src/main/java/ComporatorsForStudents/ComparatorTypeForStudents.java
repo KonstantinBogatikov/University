@@ -2,7 +2,7 @@ package ComporatorsForStudents;
 
 public enum ComparatorTypeForStudents {
     NAME,
-    ID,
+    IDUNIVERSITY,
     COURSENUMBER,
     AVGEXAMSCORE
 }

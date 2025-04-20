@@ -14,7 +14,7 @@ public class SelectorComparator {
 
     private SelectorComparator() {
         studentsComparators.put(ComparatorTypeForStudents.NAME, new StudentsComparatorByName());
-        studentsComparators.put(ComparatorTypeForStudents.ID, new StudentsComparatorById());
+        studentsComparators.put(ComparatorTypeForStudents.IDUNIVERSITY, new StudentsComparatorByIdUniversity());
         studentsComparators.put(ComparatorTypeForStudents.COURSENUMBER, new StudentsComparatorByCourseNumber());
         studentsComparators.put(ComparatorTypeForStudents.AVGEXAMSCORE, new StudentsComparatorByAvgExamScore());
 
