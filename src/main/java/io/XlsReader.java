@@ -1,6 +1,8 @@
-import Students.Student;
-import Universities.StudyProfile;
-import Universities.University;
+package io;
+
+import model.Student;
+import enums.StudyProfile;
+import model.University;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -12,19 +14,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CollectionsCreator {
+public class XlsReader {
 
-    private static CollectionsCreator collectionsCreatorInstance;
+    private static XlsReader xlsReaderInstance;
     private static String pathExcelFile = "src/main/resources/ExcelFiles/universityInfo.xlsx";
 
-    private CollectionsCreator() {
+    private XlsReader() {
     }
 
-    public static CollectionsCreator getInstance() {
-        if (collectionsCreatorInstance == null) {
-            collectionsCreatorInstance = new CollectionsCreator();
+    public static XlsReader getInstance() {
+        if (xlsReaderInstance == null) {
+            xlsReaderInstance = new XlsReader();
         }
-        return collectionsCreatorInstance;
+        return xlsReaderInstance;
     }
 
     public static List<Student> getSudentsList() {

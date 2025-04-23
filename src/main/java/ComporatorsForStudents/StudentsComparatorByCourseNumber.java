@@ -1,6 +1,6 @@
 package ComporatorsForStudents;
 
-import Students.Student;
+import model.Student;
 
 public class StudentsComparatorByCourseNumber implements StudentsComparator {
     @Override

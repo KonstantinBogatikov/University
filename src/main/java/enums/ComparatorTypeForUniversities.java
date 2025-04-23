@@ -1,4 +1,4 @@
-package ComporatorsForUniversities;
+package enums;
 
 public enum ComparatorTypeForUniversities {
     ID,

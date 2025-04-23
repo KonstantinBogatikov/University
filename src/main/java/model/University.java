@@ -1,12 +1,15 @@
-package Universities;
+package model;
+
+import enums.StudyProfile;
+import com.google.gson.annotations.SerializedName;
 
 public class University {
 
     private String id;
-    private String fullName;
+    @SerializedName("NameOfUniversity") private String fullName;
     private String shortName;
-    private int yearOfFoundation;
-    private StudyProfile mainProfile;
+    @SerializedName("StartYearForUniversity") private int yearOfFoundation;
+    @SerializedName("Specialization") private StudyProfile mainProfile;
 
     public University(String id, String fullName, String shortName, int yearOfFoundation, StudyProfile mainProfile) {
         this.id = id;
@@ -63,7 +66,7 @@ public class University {
 
     @Override
     public String toString() {
-        return "Universities.University{" +
+        return "model.University{" +
                 "id='" + id + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +

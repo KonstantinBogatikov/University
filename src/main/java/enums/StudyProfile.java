@@ -1,4 +1,4 @@
-package Universities;
+package enums;
 
 public enum StudyProfile {
     MEDICINE("Медицина"),
@@ -18,7 +18,7 @@ public enum StudyProfile {
 
     @Override
     public String toString() {
-        return "Universities.StudyProfile{" +
+        return "enums.StudyProfile{" +
                 "profileName='" + profileName + '\'' +
                 '}';
     }

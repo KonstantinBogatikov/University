@@ -1,4 +1,4 @@
-package ComporatorsForStudents;
+package enums;
 
 public enum ComparatorTypeForStudents {
     NAME,

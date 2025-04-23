@@ -1,6 +1,6 @@
 package ComporatorsForUniversities;
 
-import Universities.University;
+import model.University;
 
 public class UniversitiesComparatorByYearOfFoundation implements UniversitiesComparator {
     @Override

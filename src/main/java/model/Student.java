@@ -1,10 +1,12 @@
-package Students;
+package model;
+
+import com.google.gson.annotations.SerializedName;
 
 public class Student {
 
-    private String fullName;
+    @SerializedName("FioOfStudent") private String fullName;
     private String universityId;
-    private int currentCourseNumber;
+    @SerializedName("Course") private int currentCourseNumber;
     private float avgExamScore;
 
     public Student(String fullName, String universityId, int currentCourseNumber, float avgExamScore) {
@@ -52,7 +54,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Students.Student{" +
+        return "model.Student{" +
                 "fullName='" + fullName + '\'' +
                 ", universityId='" + universityId + '\'' +
                 ", currentCourseNumber=" + currentCourseNumber +

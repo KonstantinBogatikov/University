@@ -1,18 +1,22 @@
+package util;
+
 import ComporatorsForStudents.*;
 import ComporatorsForUniversities.*;
-import Students.Student;
-import Universities.University;
+import enums.ComparatorTypeForStudents;
+import enums.ComparatorTypeForUniversities;
+import model.Student;
+import model.University;
 
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class SelectorComparator {
+public class SelectorComparatorUtil {
 
-    private static SelectorComparator selectorComparatorInstanse;
+    private static SelectorComparatorUtil selectorComparatorInstanse;
     private static final HashMap<ComparatorTypeForStudents, Comparator<Student>> studentsComparators = new HashMap<>();
     private static final HashMap<ComparatorTypeForUniversities, Comparator<University>> universitiesComparators = new HashMap<>();
 
-    private SelectorComparator() {
+    private SelectorComparatorUtil() {
         studentsComparators.put(ComparatorTypeForStudents.NAME, new StudentsComparatorByName());
         studentsComparators.put(ComparatorTypeForStudents.IDUNIVERSITY, new StudentsComparatorByIdUniversity());
         studentsComparators.put(ComparatorTypeForStudents.COURSENUMBER, new StudentsComparatorByCourseNumber());
@@ -25,9 +29,9 @@ public class SelectorComparator {
         universitiesComparators.put(ComparatorTypeForUniversities.MAINPROFILE, new UniversitiesComparatorByMainProfile());
     }
 
-    public static SelectorComparator getInstance() {
+    public static SelectorComparatorUtil getInstance() {
         if (selectorComparatorInstanse == null) {
-            selectorComparatorInstanse = new SelectorComparator();
+            selectorComparatorInstanse = new SelectorComparatorUtil();
         }
         return selectorComparatorInstanse;
     }
