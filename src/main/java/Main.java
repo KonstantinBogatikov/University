@@ -1,31 +1,71 @@
+import io.JsonWriter;
+import io.XMLWriter;
 import io.XlsReader;
 import io.XlsWriter;
 import model.Statistics;
 import model.Student;
 import model.University;
+import model.XMLInfo;
 import util.JsonUtil;
 import util.StatisticsUtil;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static final Logger logger = Logger.getLogger(Main.class.getName());
 
-        List<Student> studentsList = XlsReader.getSudentsList();
-        List<University> universitiesList = XlsReader.getUniversitiesList();
+    public static void main(String[] args) throws IOException, JAXBException {
+        final Logger logger = Logger.getLogger(Main.class.getName());
 
-        String pathExcelFile = "src/main/resources/ExcelFiles/statistics.xlsx";
-
-        List<Statistics> statisticsList = StatisticsUtil.createStatistics(studentsList, universitiesList);
         try {
-            XlsWriter.createXlsFileWithStatistics(statisticsList, pathExcelFile);
+            LogManager.getLogManager().readConfiguration(Main.class.getResourceAsStream("logging.properties"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Ошибка конфигурации logger: " + e);
         }
 
+        //Формируем List с информацией о студентах, университетах и статистике их файла excel
+        List<Student> studentsList = XlsReader.getSudentsList();
+        List<University> universitiesList = XlsReader.getUniversitiesList();
+        List<Statistics> statisticsList = StatisticsUtil.createStatistics(studentsList, universitiesList);
 
+        //Создаем объект XMLInfo для записи его в XML файл
+        XMLInfo xmlInfo = new XMLInfo()
+                .setStudentsList(studentsList)
+                .setUniversitiesList(universitiesList)
+                .setStatisticsList(statisticsList)
+                .setProcessDate(new java.util.Date());
+
+        XMLWriter.generateXMLFileReq(xmlInfo);
+        JsonWriter.generateJSON(xmlInfo);
+
+        /*
+        //Запись файла статистики в Excel
+        String pathExcelFile = "src/main/resources/ExcelFiles/statistics.xlsx";
+        if (!studentsList.isEmpty() && !universitiesList.isEmpty()){
+        List<Statistics> statisticsList = StatisticsUtil.createStatistics(studentsList, universitiesList);
+        XlsWriter.createXlsFileWithStatistics(statisticsList, pathExcelFile);
+            logger.log(Level.INFO, "Записан файл статистики");
+        } else {
+            logger.log(Level.WARNING, "Невозможно создать файл статистики, так как один из List<Student> " +
+                    "или List<University> пустой");
+        }
+        */
+
+
+        /*
+        //Печать JSON в консоль
         //Вывод на печать в консоль JSON ARRAY из студентов
         String studentsListJson = JsonUtil.toJsonFromStudents(studentsList);
         System.out.println("JSON из студентов");
@@ -72,9 +112,11 @@ public class Main {
             //выводим на печать в консоль объект класса University, полученный из JSON
             System.out.println(universityFromJson);
         });
+        */
 
-
-        /*Comparator<Student> studentComparatorByName =
+        /*
+        //Применение разных компараторов
+        Comparator<Student> studentComparatorByName =
                 SelectorComparator.StudentsComparatorByType(ComparatorTypeForStudents.NAME);
         Comparator<Student> studentComparatorByIdUniversity =
                 SelectorComparator.StudentsComparatorByType(ComparatorTypeForStudents.IDUNIVERSITY);
@@ -137,8 +179,7 @@ public class Main {
         System.out.println("Сортировка университетов по профилю");
         universitiesList.stream()
                 .sorted(universityComparatorByMainProfile)
-                .forEach(System.out::println);*/
-
-
+                .forEach(System.out::println);
+        */
     }
 }

@@ -7,18 +7,24 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import util.StatisticsUtil;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class XlsWriter {
+
+    private static final Logger logger = Logger.getLogger(XlsWriter.class.getName());
 
     private XlsWriter() {
     }
 
-    public static void createXlsFileWithStatistics(List<Statistics> statisticsList, String pathExcelFile)
-            throws IOException {
+    public static void createXlsFileWithStatistics(List<Statistics> statisticsList, String pathExcelFile) {
         //Создаем книгу
         XSSFWorkbook workbook = new XSSFWorkbook();
         //Создаем лист
@@ -86,7 +92,14 @@ public class XlsWriter {
 
         try (FileOutputStream outputStream = new FileOutputStream(pathExcelFile)) {
             workbook.write(outputStream);
+            logger.log(Level.INFO, "Создан файл статистики");
+        } catch (IOException e){
+            logger.log(Level.WARNING, "Ошибка создания файла статистики");
+            String diagnosticTrace = Arrays.stream(Thread.currentThread().getStackTrace())
+                    .map(StackTraceElement::toString)
+                    .collect(Collectors.joining(System.lineSeparator()));
+            logger.log(Level.WARNING, diagnosticTrace);
+            logger.log(Level.WARNING, "--------------");
         }
-
     }
 }

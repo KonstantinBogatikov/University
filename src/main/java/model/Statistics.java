@@ -2,14 +2,30 @@ package model;
 
 import enums.StudyProfile;
 
+import javax.xml.bind.annotation.*;
+
+@XmlType(name = "Statistics", propOrder = {"mainProfile", "avgExamScore"})
+@XmlRootElement(name = "statisticsEntry")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Statistics {
+
+    @XmlElement(name = "universityProfile")
     private StudyProfile mainProfile;
+
+    @XmlElement(name = "avgScore")
     private float avgExamScore;
+
+    @XmlTransient
     private int countOfStudents;
+
+    @XmlTransient
     private int countOfUniversities;
+
+    @XmlTransient
     private String nameOfUniversities;
 
-    public Statistics() {}
+    public Statistics() {
+    }
 
     public StudyProfile getMainProfile() {
         return mainProfile;

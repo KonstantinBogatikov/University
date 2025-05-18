@@ -11,10 +11,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class XlsReader {
+
+    private static final Logger logger = Logger.getLogger(XlsReader.class.getName());
 
     private static XlsReader xlsReaderInstance;
     private static String pathExcelFile = "src/main/resources/ExcelFiles/universityInfo.xlsx";
@@ -45,9 +51,16 @@ public class XlsReader {
 
                 studentsList.add(student);
             }
+            logger.log(Level.INFO, "Прочитан файл universityInfo.xlsx, сформирован List<Student>");
             return studentsList;
         } catch (IOException e) {
-            System.out.println("Ошибка чтения файлй universityInfo.xlsx");
+            //System.out.println("Ошибка чтения файла universityInfo.xlsx");
+            logger.log(Level.WARNING, "Ошибка чтения файла universityInfo.xlsx");
+            String diagnosticTrace = Arrays.stream(Thread.currentThread().getStackTrace())
+                    .map(StackTraceElement::toString)
+                    .collect(Collectors.joining(System.lineSeparator()));
+            logger.log(Level.WARNING, diagnosticTrace);
+            logger.log(Level.WARNING, "--------------");
         }
         return new ArrayList<>();
     }
@@ -69,9 +82,16 @@ public class XlsReader {
 
                 universitiesList.add(university);
             }
+            logger.log(Level.INFO, "Прочитан файл universityInfo.xlsx, сформирован List<University>");
             return universitiesList;
         } catch (IOException e) {
-            System.out.println("Ошибка чтения файлй universityInfo.xlsx");
+            //System.out.println("Ошибка чтения файла universityInfo.xlsx");
+            logger.log(Level.WARNING, "Ошибка чтения файла universityInfo.xlsx");
+            String diagnosticTrace = Arrays.stream(Thread.currentThread().getStackTrace())
+                    .map(StackTraceElement::toString)
+                    .collect(Collectors.joining(System.lineSeparator()));
+            logger.log(Level.WARNING, diagnosticTrace);
+            logger.log(Level.WARNING, "--------------");
         }
         return new ArrayList<>();
     }

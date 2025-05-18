@@ -2,12 +2,29 @@ package model;
 
 import com.google.gson.annotations.SerializedName;
 
+import javax.xml.bind.annotation.*;
+
+@XmlType(name = "Student", propOrder = {"fullName", "universityId", "avgExamScore"})
+@XmlRootElement(name = "studentEntry")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Student {
 
-    @SerializedName("FioOfStudent") private String fullName;
+    @SerializedName("FioOfStudent")
+    @XmlElement(name = "studentName")
+    private String fullName;
+
+    @XmlElement(name = "universityId")
     private String universityId;
-    @SerializedName("Course") private int currentCourseNumber;
+
+    @SerializedName("Course")
+    @XmlTransient
+    private int currentCourseNumber;
+
+    @XmlElement(name = "avgScore")
     private float avgExamScore;
+
+    public Student() {
+    }
 
     public Student(String fullName, String universityId, int currentCourseNumber, float avgExamScore) {
         this.fullName = fullName;
@@ -51,6 +68,10 @@ public class Student {
         this.avgExamScore = avgExamScore;
         return this;
     }
+
+  //  private Student() {  // makes JAXB happy, will never be invoked
+    //    throw new UnsupportedOperationException("Unexpected invocation: Customer object is not intended to be used for unmarshalling, only marshalling");
+   // }
 
     @Override
     public String toString() {
